@@ -1,33 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import FilePicker from './components/FilePicker'
+import View from './components/View'
 import './App.css'
+import { useState } from 'react'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [file, setFile] = useState(null)
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+   <div className="app-main">
+      <div className="app-header">
+        <h1>Document Viewer</h1>
+       
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      
+      <div className="app-controls">
+        <FilePicker onFile={setFile}/>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+
+      {file && (
+        <div className="app-workspace">
+           <h3 className="file-info">Selected: {file.name}</h3>
+           <View file={file}/>
+        </div>
+      )}
+    </div>
     </>
   )
 }
